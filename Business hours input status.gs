@@ -1,14 +1,14 @@
 function main() {
-    var sheet = SpreadsheetApp.getActiveSheet();
-    var data = sheet.getDataRange().getValues();
-    var today = new Date();
-    var lastCol = sheet.getLastColumn();
+    var sheet = SpreadsheetApp.getActiveSheet(); //現在のシートを取得する。
+    var data = sheet.getDataRange().getValues(); //シートの全セルのデータを取得する
+    var today = new Date(); //現在の日付を取得
+    var lastCol = sheet.getLastColumn(); //取得したシートの最終列の列番号を取得する。
  
     // 1行目にある名前の一覧を取得します
-    var names = data[0].slice(1, lastCol);
+    var names = data[0].slice(1, lastCol); //slice(開始位置,終了位置)
     Logger.log(names);
  
-    // 今日の日付と一致する一列目の日付の行を取得します
+    // 今日の日付と一致する一列目の日付の行を取得する
     var found = data.slice(1, data.length).filter(function (row) {
         var dueDate = row[0];
  
@@ -44,12 +44,12 @@ function sendMessageToSlack(dueDate, unsubmitted) {
             {
                 "type": "section",
                 "text": {
-                    "type": "mrkdwn",
+                    "type": "mrkdwn",　//typeをmrkdwnとすることで太字やリンクをつけることが可能
                     "text": "今月の業務時間入力は" + dueDate + "までに済ませてください。\nよろしくお願いいたします。"
                 }
             },
             {
-                "type": "divider"
+                "type": "divider" //横線だと思われる
             },
             {
                 "type": "section",
